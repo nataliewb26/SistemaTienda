@@ -1,0 +1,170 @@
+:root {
+  --color-principal: #4f46e5;
+  --color-oscuro: #1e1b4b;
+  --color-fondo: #f8fafc;
+  --color-texto: #1f2937;
+  --radio: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, Arial, sans-serif;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.6;
+}
+
+.contenedor {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+/* ---------- Barra de navegación ---------- */
+.navbar {
+  background: var(--color-oscuro);
+  padding: 1rem 0;
+}
+
+.navbar__interior {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.navbar nav {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.navbar a {
+  color: #c7d2fe;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: white;
+}
+
+/* ---------- Portada (hero) ---------- */
+.hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  margin: 2rem 0;
+  color: white;
+  border-radius: var(--radio);
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+  margin-bottom: .5rem;
+}
+
+.boton {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: .7rem 1.4rem;
+  border: none;
+  border-radius: 999px;
+  background: white;
+  color: var(--color-principal);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ---------- Tarjetas en rejilla ---------- */
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.tarjeta {
+  background: white;
+  border-radius: var(--radio);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+  overflow: hidden;
+  padding-bottom: 1rem;
+}
+
+.tarjeta img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.tarjeta h3,
+.tarjeta p {
+  padding: .4rem 1rem 0;
+}
+
+.precio {
+  color: var(--color-principal);
+  font-weight: 700;
+}
+
+/* ---------- Formularios ---------- */
+.formulario {
+  display: grid;
+  gap: 1rem;
+  max-width: 500px;
+}
+
+.formulario input,
+.formulario textarea {
+  padding: .7rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.formulario button {
+  padding: .8rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-principal);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mensaje-ok {
+  color: #047857;
+  font-weight: 600;
+}
+
+/* ---------- Pie de página ---------- */
+.footer {
+  margin-top: 3rem;
+  padding: 1.5rem 0;
+  background: var(--color-oscuro);
+  color: #c7d2fe;
+  text-align: center;
+}
+
+/* ---------- Adaptación a celulares ---------- */
+@media (max-width: 600px) {
+  .navbar__interior {
+    flex-direction: column;
+    gap: .6rem;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+}
