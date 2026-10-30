@@ -8,8 +8,8 @@ export default function Inicio() {
     return (
         <>
             <section className="hero">
-                <h1>Bienvenido a MiTienda</h1>
-                <p>Productos de calidad, directo del productor a tu casa.</p>
+                <h1>Bienvenido a HERLENSHOP</h1>
+                <p>Encuentra las mejores ofertas, variedad y calidad directo a tu alcance.</p>
                 <Link to="/catalogo" className="boton">Ver catálogo</Link>
             </section>
 

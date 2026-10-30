@@ -5,6 +5,7 @@ import Inicio from './pages/Inicio'
 import Servicios from './pages/Servicios'
 import Catalogo from './pages/Catalogo'
 import Contacto from './pages/Contacto'
+import DetalleProducto from './pages/DetalleProducto'
 import NoEncontrada from './pages/NoEncontrada'
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/servicios" element={<Servicios />} />
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/contacto" element={<Contacto />} />
+          <Route path="/producto/:id" element={<DetalleProducto />} />
           <Route path="*" element={<NoEncontrada />} />
         </Routes>
       </main>

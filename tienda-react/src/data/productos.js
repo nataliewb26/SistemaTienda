@@ -32,6 +32,38 @@ const productos = [
         descripcion: 'Para preparar café en casa.',
         imagen: 'https://picsum.photos/seed/prensa/400/300',
     },
+    {
+        id: 5,
+        nombre: 'Termo de acero 500 ml',
+        precio: 45.0,
+        categoria: 'Accesorios',
+        descripcion: 'Mantiene la temperatura por 12 horas.',
+        imagen: 'https://picsum.photos/seed/termo/400/300',
+    },
+    {
+        id: 6,
+        nombre: 'Café molido gourmet 500 g',
+        precio: 38.0,
+        categoria: 'Café',
+        descripcion: 'Molienda media para cafetera de filtro.',
+        imagen: 'https://picsum.photos/seed/cafegourmet/400/300',
+    },
+    {
+        id: 7,
+        nombre: 'Chocolate amargo 70%',
+        precio: 14.5,
+        categoria: 'Cacao',
+        descripcion: 'Tableta artesanal con granos selectos.',
+        imagen: 'https://picsum.photos/seed/choco/400/300',
+    },
+    {
+        id: 8,
+        nombre: 'Molinillo de café manual',
+        precio: 55.0,
+        categoria: 'Accesorios',
+        descripcion: 'Muelas de cerámica ajustables.',
+        imagen: 'https://picsum.photos/seed/molino/400/300',
+    },
 ]
 
 export default productos

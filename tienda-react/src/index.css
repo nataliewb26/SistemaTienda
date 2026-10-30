@@ -1,8 +1,12 @@
 :root {
-  --color-principal: #4f46e5;
-  --color-oscuro: #1e1b4b;
-  --color-fondo: #f8fafc;
-  --color-texto: #1f2937;
+  --color-principal: #2563eb;
+  /* Color de botones y destacados */
+  --color-oscuro: #0f172a;
+  /* Fondo de la barra de navegación y pie de página */
+  --color-fondo: #f1f5f9;
+  /* Fondo general de la página */
+  --color-texto: #0f172a;
+  /* Color del texto */
   --radio: 12px;
 }
 
@@ -167,4 +171,54 @@ body {
   .hero h1 {
     font-size: 1.8rem;
   }
+}
+
+/* ---------- Modo oscuro ---------- */
+body.oscuro {
+  --color-fondo: #0b1120;
+  --color-texto: #0f172a;
+  --color-oscuro: #020617;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+/* Encabezados y textos directos */
+body.oscuro h1,
+body.oscuro h2,
+body.oscuro h3,
+body.oscuro p,
+body.oscuro label {
+  color: #f8fafc;
+}
+
+/* Tarjetas */
+body.oscuro .tarjeta {
+  background: #1e293b;
+  color: #f8fafc;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+body.oscuro .tarjeta p {
+  color: #cbd5e1;
+}
+
+/* Campos de formulario: buscador, textarea y select */
+body.oscuro input,
+body.oscuro select,
+body.oscuro textarea {
+  background: #1e293b !important;
+  color: #f8fafc !important;
+  border: 1px solid #334155 !important;
+}
+
+/* Placeholder del buscador en modo oscuro */
+body.oscuro input::placeholder,
+body.oscuro textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Opciones desplegables del select */
+body.oscuro select option {
+  background: #1e293b;
+  color: #f8fafc;
 }
