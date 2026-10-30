@@ -1,31 +1,66 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
-import productos from '../data/productos'
+
+// Dirección del servidor backend
+const API = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 
 export default function Catalogo() {
-    // Estado 1: texto del buscador
+    // Estados para los datos de la API
+    const [productos, setProductos] = useState([])
+    const [cargando, setCargando] = useState(true)
+    const [error, setError] = useState('')
+
+    // Estados de interfaz (búsqueda, categoría y orden)
     const [busqueda, setBusqueda] = useState('')
-    // Estado 2: categoría seleccionada (por defecto 'Todas')
     const [categoria, setCategoria] = useState('Todas')
-    // Estado 3: criterio de ordenamiento por precio ('ninguno', 'menor', 'mayor')
     const [orden, setOrden] = useState('ninguno')
 
-    // Lista de categorías disponibles para generar los botones
     const categorias = ['Todas', 'Café', 'Accesorios', 'Cacao']
 
-    // 1. Filtrado doble: primero por categoría y luego por coincidencia de texto
+    // useEffect se ejecuta una sola vez cuando se abre la página
+    useEffect(() => {
+        fetch(API + '/api/productos')
+            .then((res) => {
+                if (!res.ok) throw new Error('Error al conectar con la API')
+                return res.json()
+            })
+            .then((data) => setProductos(data))
+            .catch(() => setError('No pudimos conectar con el servidor. ¿Está encendido el puerto 3001?'))
+            .finally(() => setCargando(false))
+    }, [])
+
+    // 1. Filtrado por categoría y texto sobre los productos que trajo el servidor
     const filtrados = productos.filter((p) => {
         const coincideCategoria = categoria === 'Todas' || p.categoria === categoria
         const coincideTexto = p.nombre.toLowerCase().includes(busqueda.toLowerCase())
         return coincideCategoria && coincideTexto
     })
 
-    // 2. Ordenamiento por precio usando [...filtrados].sort(...)
+    // 2. Ordenamiento por precio
     const productosFinales = [...filtrados].sort((a, b) => {
         if (orden === 'menor') return a.precio - b.precio
         if (orden === 'mayor') return b.precio - a.precio
-        return 0 // Sin orden específico si es 'ninguno'
+        return 0
     })
+
+    // Estado de carga
+    if (cargando) {
+        return (
+            <div style={{ textAlign: 'center', padding: '3rem' }}>
+                <p style={{ fontSize: '1.2rem', fontWeight: 600 }}>Cargando catálogo desde el servidor...</p>
+            </div>
+        )
+    }
+
+    // Estado de error (si el servidor está apagado)
+    if (error) {
+        return (
+            <div style={{ textAlign: 'center', padding: '3rem', color: '#ef4444' }}>
+                <h2>⚠️ Error de conexión</h2>
+                <p style={{ marginTop: '0.5rem' }}>{error}</p>
+            </div>
+        )
+    }
 
     return (
         <>
@@ -41,14 +76,12 @@ export default function Catalogo() {
                     width: '100%',
                     padding: '0.7rem',
                     margin: '1rem 0',
-                    borderRadius: '8px',
-                    border: '1px solid #cbd5e1'
+                    borderRadius: '8px'
                 }}
             />
 
             {/* Fila de controles: Categorías y Ordenamiento */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
-                {/* Botones de categoría */}
                 <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                     {categorias.map((cat) => (
                         <button
@@ -71,7 +104,6 @@ export default function Catalogo() {
                     ))}
                 </div>
 
-                {/* Selector de orden por precio */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <label htmlFor="orden-precio" style={{ fontWeight: 600, fontSize: '0.9rem' }}>
                         Ordenar por:
@@ -83,7 +115,6 @@ export default function Catalogo() {
                         style={{
                             padding: '0.5rem',
                             borderRadius: '8px',
-                            border: '1px solid #cbd5e1',
                             font: 'inherit',
                             cursor: 'pointer'
                         }}
@@ -97,7 +128,7 @@ export default function Catalogo() {
 
             <p>{productosFinales.length} producto(s) encontrado(s)</p>
 
-            {/* Cuadrícula de tarjetas con los productos filtrados y ordenados */}
+            {/* Rejilla de productos */}
             <div className="rejilla">
                 {productosFinales.map((p) => (
                     <ProductCard key={p.id} producto={p} />
