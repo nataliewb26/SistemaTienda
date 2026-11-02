@@ -75,8 +75,19 @@ const productos = [
     }
 ]
 
-// 1. Endpoint: Obtener todos los productos
+// 1. Endpoint: Obtener todos los productos (o filtrados por categoría)
 app.get('/api/productos', (req, res) => {
+    const { categoria } = req.query
+
+    if (categoria && categoria !== 'Todas') {
+        // decodeURIComponent evita fallos con la tilde de Café (Caf%C3%A9)
+        const categoriaBuscada = decodeURIComponent(categoria).trim().toLowerCase()
+        const filtrados = productos.filter(
+            (p) => p.categoria.trim().toLowerCase() === categoriaBuscada
+        )
+        return res.json(filtrados)
+    }
+
     res.json(productos)
 })
 
